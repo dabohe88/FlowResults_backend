@@ -1,51 +1,65 @@
 <?php
-// Encabezados para permitir acceso desde el frontend (CORS)
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
 
-// Conexión con la base de datos usando PDO
-require_once('../db.php');
+require_once(__DIR__ . '/../db.php');
 
-// Consulta SQL
 $sql = "
 SELECT
-  m.id,
-  m.nombre,
+  m.id AS medico_id,
+  m.nombre AS medico_nombre,
   m.imagen,
   m.email,
   m.contacto,
-  GROUP_CONCAT(DISTINCT e.nombre) AS especialidades,
-  GROUP_CONCAT(DISTINCT c.nombre) AS clinicas,
-  GROUP_CONCAT(DISTINCT p.nombre) AS procedimientos
+  e.nombre AS especialidad,
+  a.nombre AS area
 FROM medico m
 LEFT JOIN medico_especialidad me ON m.id = me.medico_id
 LEFT JOIN especialidad e ON me.especialidad_id = e.id
-LEFT JOIN medico_clinica mc ON m.id = mc.medico_id
-LEFT JOIN clinica c ON mc.clinica_id = c.id
-LEFT JOIN medico_procedimiento mp ON m.id = mp.medico_id
-LEFT JOIN procedimiento p ON mp.procedimiento_id = p.id
-GROUP BY m.id
-ORDER BY m.id
+LEFT JOIN area a ON e.area_id = a.id
+ORDER BY a.nombre, m.nombre
 ";
 
 try {
     $stmt = $pdo->query($sql);
-    $medicos = [];
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $medicos[] = [
-            'id' => $row['id'],
-            'nombre' => $row['nombre'],
-            'imagen' => $row['imagen'],
-            'email' => $row['email'],
-            'contacto' => $row['contacto'],
-            'especialidades' => explode(',', $row['especialidades'] ?? ''),
-            'clinicas' => explode(',', $row['clinicas'] ?? ''),
-            'procedimientos' => explode(',', $row['procedimientos'] ?? ''),
-        ];
+    $output = [];
+
+    foreach ($result as $row) {
+        $area = $row['area'] ?? 'Otras';
+        $medico_id = $row['medico_id'];
+
+        if (!isset($output[$area])) {
+            $output[$area] = [];
+        }
+
+        $found = false;
+        foreach ($output[$area] as &$medico) {
+            if ($medico['id'] === $medico_id) {
+                if (!in_array($row['especialidad'], $medico['especialidades'])) {
+                    $medico['especialidades'][] = $row['especialidad'];
+                }
+                $found = true;
+                break;
+            }
+        }
+
+        if (!$found) {
+            $output[$area][] = [
+                'id' => $medico_id,
+                'nombre' => $row['medico_nombre'],
+                'imagen' => $row['imagen'],
+                'email' => $row['email'],
+                'contacto' => $row['contacto'],
+                'especialidades' => $row['especialidad'] ? [$row['especialidad']] : [],
+				'descripcion' => $row['especialidad'] ?? ''  // Aquí usamos la especialidad principal como descripción
+            ];
+        }
     }
 
-    echo json_encode($medicos, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+    echo json_encode($output, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+
 } catch (PDOException $e) {
     echo json_encode(['error' => 'Error en la consulta: ' . $e->getMessage()]);
 }
