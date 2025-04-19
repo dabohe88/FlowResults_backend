@@ -13,7 +13,7 @@ SELECT
   m.nombre,
   m.imagen,
   m.email,
-  m.telefono,
+  m.contacto,
   GROUP_CONCAT(DISTINCT e.nombre) AS especialidades,
   GROUP_CONCAT(DISTINCT c.nombre) AS clinicas,
   GROUP_CONCAT(DISTINCT p.nombre) AS procedimientos
