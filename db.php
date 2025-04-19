@@ -1,6 +1,6 @@
 <?php
 // db.php - conexión a SQLite
-$db_path = __DIR__ . '/flowresultsDB.db';
+$db_path = __DIR__ . '/db/flowresultsDB.db';
 try {
     $pdo = new PDO("sqlite:$db_path");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
