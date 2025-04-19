@@ -3,10 +3,10 @@
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
 
-// Conexión con la base de datos
+// Conexión con la base de datos usando PDO
 require_once('../db.php');
 
-// Consulta SQL para obtener médicos con relaciones a especialidades, clínicas y procedimientos
+// Consulta SQL
 $sql = "
 SELECT
   m.id,
@@ -28,22 +28,25 @@ GROUP BY m.id
 ORDER BY m.id
 ";
 
-$result = $conn->query($sql);
+try {
+    $stmt = $pdo->query($sql);
+    $medicos = [];
 
-$medicos = [];
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $medicos[] = [
+            'id' => $row['id'],
+            'nombre' => $row['nombre'],
+            'imagen' => $row['imagen'],
+            'email' => $row['email'],
+            'telefono' => $row['telefono'],
+            'especialidades' => explode(',', $row['especialidades'] ?? ''),
+            'clinicas' => explode(',', $row['clinicas'] ?? ''),
+            'procedimientos' => explode(',', $row['procedimientos'] ?? ''),
+        ];
+    }
 
-while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
-    $medicos[] = [
-        'id' => $row['id'],
-        'nombre' => $row['nombre'],
-        'imagen' => $row['imagen'],
-        'email' => $row['email'],
-        'telefono' => $row['telefono'],
-        'especialidades' => explode(',', $row['especialidades']),
-        'clinicas' => explode(',', $row['clinicas']),
-        'procedimientos' => explode(',', $row['procedimientos']),
-    ];
+    echo json_encode($medicos, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+} catch (PDOException $e) {
+    echo json_encode(['error' => 'Error en la consulta: ' . $e->getMessage()]);
 }
-
-echo json_encode($medicos, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 ?>
