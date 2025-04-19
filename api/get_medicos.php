@@ -38,7 +38,7 @@ try {
             'nombre' => $row['nombre'],
             'imagen' => $row['imagen'],
             'email' => $row['email'],
-            'telefono' => $row['telefono'],
+            'contacto' => $row['contacto'],
             'especialidades' => explode(',', $row['especialidades'] ?? ''),
             'clinicas' => explode(',', $row['clinicas'] ?? ''),
             'procedimientos' => explode(',', $row['procedimientos'] ?? ''),
