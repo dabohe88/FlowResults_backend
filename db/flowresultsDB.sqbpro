@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="flowresultsDB.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="browser pragmas query structure" current="2"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1289"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="pais" custom_title="0" dock_id="1" table="4,4:mainpais"/><dock_state state="000000ff00000000fd0000000100000002000004f20000037efc0100000001fb000000160064006f0063006b00420072006f00770073006500310100000000000004f20000011e00ffffff000002690000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="area" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="35"/><column index="2" value="151"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="medico" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort><column index="0" mode="0"/></sort><column_widths><column index="1" value="35"/><column index="2" value="271"/><column index="3" value="135"/><column index="4" value="247"/><column index="5" value="279"/><column index="6" value="835"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="pais" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="35"/><column index="2" value="87"/><column index="3" value="45"/><column index="4" value="215"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1*">ALTER TABLE medico ADD COLUMN enlace_cita TEXT;
+
+UPDATE medico 
+SET enlace_cita = 'https://www.hulihealth.com/es/doctor/jorge-cubero-sotela?utm_medium=ppc&amp;utm_source=adwords&amp;utm_campaign=Huli+health+campaign&amp;utm_term=cirujano+digestivo&amp;fc_utm_medium=ppc&amp;fc_utm_source=adwords&amp;fc_utm_campaign=Huli+health+campaign&amp;fc_utm_term=cirujano+digestivo' 
+WHERE nombre = 'Dr. Jorge Cubero Sotela';
+
+UPDATE medico 
+SET enlace_cita = 'https://www.clinicaskn.com/contactenos/' 
+WHERE nombre = 'Dra. Dánitza Orlich Wolff';
+
+UPDATE medico 
+SET enlace_cita = 'https://www.hulihealth.com/es/doctor/jose-gabriel-cabezas-garita?utm_medium=ppc&amp;utm_source=adwords&amp;utm_campaign=Huli+health+campaign&amp;utm_term=cirujano+digestivo&amp;fc_utm_medium=ppc&amp;fc_utm_source=adwords&amp;fc_utm_campaign=Huli+health+campaign&amp;fc_utm_term=cirujano+digestivo' 
+WHERE nombre = 'Dr. José Gabriel Cabezas Garita';
+
+UPDATE medico 
+SET enlace_cita = 'https://citas-clinicabiblica.com/es/agendar_cita/68/especialistas/Cortes-Antia-Guillermo' 
+WHERE nombre = 'Dr. Guillermo Cortés Antia';
+
+UPDATE medico 
+SET enlace_cita = 'https://www.hulihealth.com/es/doctor/natalia-alpizar-alvarez?utm_medium=ppc&amp;utm_source=adwords&amp;utm_campaign=Huli+health+campaign&amp;utm_term=cirujano+digestivo&amp;fc_utm_medium=ppc&amp;fc_utm_source=adwords&amp;fc_utm_campaign=Huli+health+campaign&amp;fc_utm_term=cirujano+digestivo' 
+WHERE nombre = 'Dra. Natalia Alpízar Álvarez';
+
+UPDATE medico 
+SET enlace_cita = 'https://kriebeldental.com/estimate/' 
+WHERE nombre = 'Dr. Mariano Kriebel';
+
+UPDATE medico 
+SET enlace_cita = 'https://www.hulihealth.com/es/doctor/juliana-vallejo-baron?utm_medium=ppc&amp;utm_source=adwords&amp;utm_campaign=Huli+health+campaign&amp;utm_term=cirujano+digestivo&amp;fc_utm_medium=ppc&amp;fc_utm_source=adwords&amp;fc_utm_campaign=Huli+health+campaign&amp;fc_utm_term=cirujano+digestivo' 
+WHERE nombre = 'Dra. Juliana Vallejo Barón';
+
+UPDATE medico 
+SET enlace_cita = 'https://confidentalcr.com/contact-us/' 
+WHERE nombre = 'Dr. José V. Garita Carrillo';
+
+UPDATE medico 
+SET enlace_cita = 'https://www.hulihealth.com/es/doctor/andres-gamboa-sanabria?utm_medium=ppc&amp;utm_source=adwords&amp;utm_campaign=Huli+health+campaign&amp;utm_term=cirujano+digestivo&amp;fc_utm_medium=ppc&amp;fc_utm_source=adwords&amp;fc_utm_campaign=Huli+health+campaign&amp;fc_utm_term=cirujano+digestivo' 
+WHERE nombre = 'Dr. Andrés Gamboa Sanabria';
+
+UPDATE medico 
+SET enlace_cita = 'https://www.hulihealth.com/es/doctor/mario-gonzalez-salas?utm_medium=ppc&amp;utm_source=adwords&amp;utm_campaign=Huli+health+campaign&amp;utm_term=cirujano+digestivo&amp;fc_utm_medium=ppc&amp;fc_utm_source=adwords&amp;fc_utm_campaign=Huli+health+campaign&amp;fc_utm_term=cirujano+digestivo' 
+WHERE nombre = 'Dr. Mario González Salas';
+
+UPDATE medico 
+SET enlace_cita = 'https://www.hulihealth.com/es/doctor/vladimir-rodriguez-cambronero_6afbca?utm_medium=ppc&amp;utm_source=adwords&amp;utm_campaign=Huli+health+campaign&amp;utm_term=cirujano+digestivo&amp;fc_utm_medium=ppc&amp;fc_utm_source=adwords&amp;fc_utm_campaign=Huli+health+campaign&amp;fc_utm_term=cirujano+digestivo' 
+WHERE nombre = 'Dr. Vladimir Rodríguez Cambronero';
+
+UPDATE medico 
+SET enlace_cita = 'https://directorio.hospitalcima.com/es/doctor/jorge-gutierrez-murillo' 
+WHERE nombre = 'Dr. Jorge Gutiérrez Murillo';
+
+UPDATE medico 
+SET enlace_cita = 'https://www.hulihealth.com/es/doctor/lilliana-estrada-chaverri?utm_medium=ppc&amp;utm_source=adwords&amp;utm_campaign=Huli+health+campaign&amp;utm_term=cirujano+digestivo&amp;fc_utm_medium=ppc&amp;fc_utm_source=adwords&amp;fc_utm_campaign=Huli+health+campaign&amp;fc_utm_term=cirujano+digestivo' 
+WHERE nombre = 'Dra. Lilliana Estrada Chaverri';
+
+UPDATE medico 
+SET enlace_cita = 'https://artdentalcare.com/' 
+WHERE nombre = 'Dr. Esteban Torres Briceño';
+
+UPDATE medico 
+SET enlace_cita = NULL 
+WHERE nombre = 'Dr. Juan Carlos Montero Vargas';
+
+ALTER TABLE medico ADD COLUMN enlace_cita TEXT;
+
+CREATE TABLE pais (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nombre TEXT NOT NULL,
+  codigo TEXT NOT NULL UNIQUE,
+  bandera TEXT
+);
+
+INSERT INTO pais (nombre, codigo, bandera) VALUES
+  ('Costa Rica', 'CR', 'assets/img/banderas/cr.svg'),
+  ('México', 'MX', 'assets/img/banderas/mx.svg'),
+  ('Colombia', 'CO', 'assets/img/banderas/co.svg');
+
+ALTER TABLE medico ADD COLUMN pais_id INTEGER REFERENCES pais(id);
+
+
+INSERT INTO medico (nombre, pais) VALUES ('Dr. Juan Carlos Montero Vargas', 'CR');
+INSERT INTO medico (nombre, pais) VALUES ('Dr. Esteban Torres Briceño', 'CR');
+INSERT INTO medico (nombre, pais) VALUES ('Dr. Guillermo Cortés Antia', 'CR');
+INSERT INTO medico (nombre, pais) VALUES ('Dr. José V. Garita Carrillo', 'CR');
+INSERT INTO medico (nombre, pais) VALUES ('Dr. Jorge Gutiérrez Murillo', 'CR');
+INSERT INTO medico (nombre, pais) VALUES ('Dr. Mariano Kriebel', 'CR');
+INSERT INTO medico (nombre, pais) VALUES ('Dra. Dánitza Orlich Wolff', 'CR');
+INSERT INTO medico (nombre, pais) VALUES ('Dr. Andrés Gamboa Sanabria', 'CR');
+INSERT INTO medico (nombre, pais) VALUES ('Dr. Jorge Cubero Sotela', 'CR');
+INSERT INTO medico (nombre, pais) VALUES ('Dr. José Gabriel Cabezas Garita', 'CR');
+INSERT INTO medico (nombre, pais) VALUES ('Dra. Juliana Vallejo Barón', 'CR');
+INSERT INTO medico (nombre, pais) VALUES ('Dra. Lilliana Estrada Chaverri', 'CR');
+INSERT INTO medico (nombre, pais) VALUES ('Dr. Mario González Salas', 'CR');
+INSERT INTO medico (nombre, pais) VALUES ('Dra. Natalia Alpízar Álvarez', 'CR');
+INSERT INTO medico (nombre, pais) VALUES ('Dr. Vladimir Rodríguez Cambronero', 'CR');
+
+DELETE FROM medico WHERE pais = 'CR';
+
+UPDATE medico SET pais = 'CR';
+
+</sql><current_tab id="0"/></tab_sql></sqlb_project>

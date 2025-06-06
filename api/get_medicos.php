@@ -11,12 +11,23 @@ SELECT
   m.imagen,
   m.email,
   m.contacto,
+  m.enlace_cita,
+  m.pais AS pais_codigo,
+  pa.nombre AS pais_nombre,
+  pa.bandera AS pais_bandera,
+  c.nombre AS clinica,
   e.nombre AS especialidad,
-  a.nombre AS area
+  a.nombre AS area,
+  p.nombre AS procedimiento
 FROM medico m
+LEFT JOIN pais pa ON m.pais = pa.codigo
 LEFT JOIN medico_especialidad me ON m.id = me.medico_id
 LEFT JOIN especialidad e ON me.especialidad_id = e.id
 LEFT JOIN area a ON e.area_id = a.id
+LEFT JOIN medico_clinica mc ON m.id = mc.medico_id
+LEFT JOIN clinica c ON mc.clinica_id = c.id
+LEFT JOIN medico_procedimiento mp ON m.id = mp.medico_id
+LEFT JOIN procedimiento p ON mp.procedimiento_id = p.id
 ORDER BY a.nombre, m.nombre
 ";
 
@@ -37,8 +48,11 @@ try {
         $found = false;
         foreach ($output[$area] as &$medico) {
             if ($medico['id'] === $medico_id) {
-                if (!in_array($row['especialidad'], $medico['especialidades'])) {
+                if (!in_array($row['especialidad'], $medico['especialidades']) && $row['especialidad']) {
                     $medico['especialidades'][] = $row['especialidad'];
+                }
+                if (!in_array($row['procedimiento'], $medico['procedimientos']) && $row['procedimiento']) {
+                    $medico['procedimientos'][] = $row['procedimiento'];
                 }
                 $found = true;
                 break;
@@ -49,11 +63,16 @@ try {
             $output[$area][] = [
                 'id' => $medico_id,
                 'nombre' => $row['medico_nombre'],
+                'pais_codigo' => $row['pais_codigo'],
+                'pais_nombre' => $row['pais_nombre'],
+                'bandera' => $row['pais_bandera'],
                 'imagen' => $row['imagen'],
                 'email' => $row['email'],
                 'contacto' => $row['contacto'],
+                'clinica' => $row['clinica'] ?? '',
                 'especialidades' => $row['especialidad'] ? [$row['especialidad']] : [],
-				'descripcion' => $row['especialidad'] ?? ''  // Aquí usamos la especialidad principal como descripción
+                'procedimientos' => $row['procedimiento'] ? [$row['procedimiento']] : [],
+                'enlace_cita' => $row['enlace_cita'] ?? ''
             ];
         }
     }

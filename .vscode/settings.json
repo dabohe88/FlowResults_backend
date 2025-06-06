@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/3600b0d8-133e-444a-a20d-dd30ed81d6f8/resourceGroups/FlowResultsGroup/providers/Microsoft.Web/sites/flowresults-backend",
+    "appService.deploySubpath": "."
+}
